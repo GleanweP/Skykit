@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+        "model": "skykit:block/tier_1_block"
+    }
+  }
+}

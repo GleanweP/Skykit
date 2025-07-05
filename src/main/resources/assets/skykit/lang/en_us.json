@@ -1,0 +1,7 @@
+{
+  "skykit.creativetab": "SkyKit Items",
+  "block.skykit.tier_1_block": "Wooden Cobblestone Generator",
+
+  "tooltip.skykit.genblock.tier" : "Tier 1",
+  "tooltip.skykit.genblock.production": "Produces Cobblestone"
+}

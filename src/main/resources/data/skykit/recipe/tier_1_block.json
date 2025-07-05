@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": "minecraft:glass",
+    "L": "minecraft:lava_bucket",
+    "R": "minecraft:iron_ingot",
+    "W": "minecraft:water_bucket"
+  },
+  "pattern": [
+    "RRR",
+    "RGR",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "skykit:tier_1_block"
+  }
+}
