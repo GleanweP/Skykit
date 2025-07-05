@@ -56,8 +56,37 @@ public class SkyKit {
                     .sound(SoundType.GILDED_BLACKSTONE)
                     .lightLevel(state -> 15), 1));
 
+    public static final DeferredBlock<Block> TIER_2 = registerBlock("tier_2_block",
+            () -> new GenBlock(BlockBehaviour.Properties.of()
+                    .strength(1f)
+                    .noTerrainParticles()
+                    .sound(SoundType.GILDED_BLACKSTONE)
+                    .lightLevel(state -> 15), 2));
+
+    public static final DeferredBlock<Block> TIER_3 = registerBlock("tier_3_block",
+            () -> new GenBlock(BlockBehaviour.Properties.of()
+                    .strength(1f)
+                    .noTerrainParticles()
+                    .sound(SoundType.GILDED_BLACKSTONE)
+                    .lightLevel(state -> 15), 3));
+
+    public static final DeferredBlock<Block> TIER_4 = registerBlock("tier_4_block",
+            () -> new GenBlock(BlockBehaviour.Properties.of()
+                    .strength(1f)
+                    .noTerrainParticles()
+                    .sound(SoundType.GILDED_BLACKSTONE)
+                    .lightLevel(state -> 15), 4));
+
+    public static final DeferredBlock<Block> TIER_5 = registerBlock("tier_5_block",
+            () -> new GenBlock(BlockBehaviour.Properties.of()
+                    .strength(1f)
+                    .noTerrainParticles()
+                    .sound(SoundType.GILDED_BLACKSTONE)
+                    .lightLevel(state -> 15), 5));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GenBlockEntity>> GEN_BLOCK_ENTITY = BLOCK_ENTITIES.register("gen_block_entity",
-            () -> BlockEntityType.Builder.of(GenBlockEntity::new, TIER_1.get()).build(null));
+            () -> BlockEntityType.Builder.of(GenBlockEntity::new,
+                    TIER_1.get(), TIER_2.get(), TIER_3.get(), TIER_4.get(), TIER_5.get()).build(null));
 
     public SkyKit(IEventBus modEventBus, ModContainer modContainer) {
         ITEMS.register(modEventBus);

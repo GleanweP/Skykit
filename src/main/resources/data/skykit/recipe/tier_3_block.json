@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "skykit:tier_2_block"
+    },
+    "R": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RGR",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "skykit:tier_3_block"
+  }
+}

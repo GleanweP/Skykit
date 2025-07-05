@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "skykit:tier_4_block"
+    },
+    "R": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RGR",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "skykit:tier_5_block"
+  }
+}

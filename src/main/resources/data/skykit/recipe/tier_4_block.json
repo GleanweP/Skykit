@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "skykit:tier_3_block"
+    },
+    "R": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RGR",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "skykit:tier_4_block"
+  }
+}

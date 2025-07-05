@@ -91,6 +91,6 @@ public class GenBlock extends BaseEntityBlock {
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
         tooltip.add(Component.translatable("tooltip.skykit.genblock.tier", this.tier).withStyle(ChatFormatting.GOLD));
-        tooltip.add(Component.translatable("tooltip.skykit.genblock.production").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.skykit.genblock.production", this.tier).withStyle(ChatFormatting.GRAY));
     }
 }

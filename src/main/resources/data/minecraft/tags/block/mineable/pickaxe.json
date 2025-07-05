@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "skykit:tier_1_block"
+    "skykit:tier_1_block",
+    "skykit:tier_2_block",
+    "skykit:tier_3_block",
+    "skykit:tier_4_block",
+    "skykit:tier_5_block"
   ]
 }

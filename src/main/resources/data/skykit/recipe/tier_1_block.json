@@ -2,14 +2,22 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "G": "minecraft:glass",
-    "L": "minecraft:lava_bucket",
-    "R": "minecraft:iron_ingot",
-    "W": "minecraft:water_bucket"
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "L": {
+      "item": "minecraft:lava_bucket"
+    },
+    "R": {
+      "item": "minecraft:cobblestone"
+    }
   },
   "pattern": [
     "RRR",
-    "RGR",
+    "WGL",
     "RRR"
   ],
   "result": {
