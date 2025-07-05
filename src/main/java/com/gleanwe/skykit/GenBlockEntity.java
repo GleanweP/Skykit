@@ -39,13 +39,17 @@ public class GenBlockEntity extends BlockEntity {
     private void generateItems() {
         if (getBlockState().getBlock() instanceof GenBlock genBlock) {
             int productionRate = (int) Math.pow(2, genBlock.tier - 1);
-            ItemStack cobblestone = new ItemStack(Items.COBBLESTONE, productionRate);
 
             if (internalBuffer.isEmpty()) {
-                internalBuffer = cobblestone;
-            } else if (ItemStack.isSameItemSameComponents(internalBuffer, cobblestone)) {
+                // Create a new ItemStack with the production rate, but don't exceed max buffer size
+                int initialAmount = Math.min(productionRate, maxBufferSize);
+                internalBuffer = new ItemStack(Items.COBBLESTONE, initialAmount);
+            } else if (internalBuffer.is(Items.COBBLESTONE)) {
+                // Add items to existing buffer, respecting max buffer size
                 int canAdd = Math.min(productionRate, maxBufferSize - internalBuffer.getCount());
-                internalBuffer.grow(canAdd);
+                if (canAdd > 0) {
+                    internalBuffer.grow(canAdd);
+                }
             }
 
             setChanged();
@@ -55,35 +59,37 @@ public class GenBlockEntity extends BlockEntity {
     private void pushToExternalInventory() {
         if (internalBuffer.isEmpty()) return;
 
+        // Try to push to horizontal neighbors first
         for (Direction direction : Direction.Plane.HORIZONTAL) {
+            if (internalBuffer.isEmpty()) break;
+
             BlockPos targetPos = getBlockPos().relative(direction);
             var itemHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, targetPos, direction.getOpposite());
 
             if (itemHandler != null) {
-                ItemStack remaining = ItemHandlerHelper.insertItem(itemHandler, internalBuffer, false);
-                internalBuffer = remaining;
+                internalBuffer = ItemHandlerHelper.insertItem(itemHandler, internalBuffer, false);
                 setChanged();
-
-                if (internalBuffer.isEmpty()) {
-                    break; // Stop if the buffer is empty
-                }
             }
         }
 
-        BlockPos abovePos = getBlockPos().above();
-        var itemHandlerAbove = level.getCapability(Capabilities.ItemHandler.BLOCK, abovePos, Direction.DOWN);
-        if (itemHandlerAbove != null) {
-            ItemStack remaining = ItemHandlerHelper.insertItem(itemHandlerAbove, internalBuffer, false);
-            internalBuffer = remaining;
-            setChanged();
+        // Try to push above
+        if (!internalBuffer.isEmpty()) {
+            BlockPos abovePos = getBlockPos().above();
+            var itemHandlerAbove = level.getCapability(Capabilities.ItemHandler.BLOCK, abovePos, Direction.DOWN);
+            if (itemHandlerAbove != null) {
+                internalBuffer = ItemHandlerHelper.insertItem(itemHandlerAbove, internalBuffer, false);
+                setChanged();
+            }
         }
 
-        BlockPos belowPos = getBlockPos().below();
-        var itemHandlerBelow = level.getCapability(Capabilities.ItemHandler.BLOCK, belowPos, Direction.UP);
-        if (itemHandlerBelow != null) {
-            ItemStack remaining = ItemHandlerHelper.insertItem(itemHandlerBelow, internalBuffer, false);
-            internalBuffer = remaining;
-            setChanged();
+        // Try to push below
+        if (!internalBuffer.isEmpty()) {
+            BlockPos belowPos = getBlockPos().below();
+            var itemHandlerBelow = level.getCapability(Capabilities.ItemHandler.BLOCK, belowPos, Direction.UP);
+            if (itemHandlerBelow != null) {
+                internalBuffer = ItemHandlerHelper.insertItem(itemHandlerBelow, internalBuffer, false);
+                setChanged();
+            }
         }
     }
 
@@ -107,9 +113,18 @@ public class GenBlockEntity extends BlockEntity {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        if (tag.contains("Buffer")) {
-            internalBuffer = ItemStack.parseOptional(registries, tag.getCompound("Buffer"));
+
+        // Load the buffer with special handling for large counts
+        if (tag.contains("BufferItem") && tag.contains("BufferCount")) {
+            String itemId = tag.getString("BufferItem");
+            int count = tag.getInt("BufferCount");
+
+            if (!itemId.isEmpty() && count > 0) {
+                // Create ItemStack with the stored count (can exceed normal stack limits)
+                internalBuffer = new ItemStack(Items.COBBLESTONE, count);
+            }
         }
+
         maxBufferSize = tag.getInt("MaxBufferSize");
         if (maxBufferSize == 0) {
             updateMaxBufferSize(); // Ensure maxBufferSize is set if not present
@@ -119,9 +134,13 @@ public class GenBlockEntity extends BlockEntity {
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
+
+        // Save buffer using custom method to avoid max_stack_size issues
         if (!internalBuffer.isEmpty()) {
-            tag.put("Buffer", internalBuffer.saveOptional(registries));
+            tag.putString("BufferItem", internalBuffer.getItem().toString());
+            tag.putInt("BufferCount", internalBuffer.getCount());
         }
+
         tag.putInt("MaxBufferSize", maxBufferSize);
     }
 }

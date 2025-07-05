@@ -59,25 +59,25 @@ public class SkyKit {
     public static final DeferredBlock<Block> TIER_2 = registerBlock("tier_2_block",
             () -> new GenBlock(BlockBehaviour.Properties.of()
                     .strength(1f)
-                    .sound(SoundType.GILDED_BLACKSTONE)
+                    .sound(SoundType.METAL)
                     .lightLevel(state -> 15), 2));
 
     public static final DeferredBlock<Block> TIER_3 = registerBlock("tier_3_block",
             () -> new GenBlock(BlockBehaviour.Properties.of()
                     .strength(1f)
-                    .sound(SoundType.GILDED_BLACKSTONE)
+                    .sound(SoundType.METAL)
                     .lightLevel(state -> 15), 3));
 
     public static final DeferredBlock<Block> TIER_4 = registerBlock("tier_4_block",
             () -> new GenBlock(BlockBehaviour.Properties.of()
                     .strength(1f)
-                    .sound(SoundType.GILDED_BLACKSTONE)
+                    .sound(SoundType.METAL)
                     .lightLevel(state -> 15), 4));
 
     public static final DeferredBlock<Block> TIER_5 = registerBlock("tier_5_block",
             () -> new GenBlock(BlockBehaviour.Properties.of()
                     .strength(1f)
-                    .sound(SoundType.GILDED_BLACKSTONE)
+                    .sound(SoundType.METAL)
                     .lightLevel(state -> 15), 5));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GenBlockEntity>> GEN_BLOCK_ENTITY = BLOCK_ENTITIES.register("gen_block_entity",
