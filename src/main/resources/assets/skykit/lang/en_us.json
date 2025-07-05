@@ -6,6 +6,8 @@
   "block.skykit.tier_4_block": "Cobblestone Generator IV",
   "block.skykit.tier_5_block": "Cobblestone Generator V",
 
+  "block.skykit.moai_machine": "Moai Machine",
+
   "tooltip.skykit.genblock.tier": "Tier %s",
   "tooltip.skykit.genblock.production": "Produces %s Cobblestone per ticks"
 }

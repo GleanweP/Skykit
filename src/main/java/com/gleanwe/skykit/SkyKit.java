@@ -89,6 +89,12 @@ public class SkyKit {
             () -> BlockEntityType.Builder.of(GenBlockEntity::new,
                     TIER_1.get(), TIER_2.get(), TIER_3.get(), TIER_4.get(), TIER_5.get()).build(null));
 
+    public static final DeferredBlock<Block> MOAI_MACHINE = registerBlock("moai_machine",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(1f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+
     public SkyKit(IEventBus modEventBus, ModContainer modContainer) {
         ITEMS.register(modEventBus);
         BLOCKS.register(modEventBus);
