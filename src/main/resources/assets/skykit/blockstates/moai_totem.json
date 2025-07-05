@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "skykit:block/moai_totem"
+    },
+    "facing=east": {
+      "model": "skykit:block/moai_totem",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "skykit:block/moai_totem",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "skykit:block/moai_totem",
+      "y": 270
+    }
+  }
+}

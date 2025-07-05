@@ -43,7 +43,7 @@ public class SkyKit {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 
     public static final Supplier<CreativeModeTab> SKY_KIT_TAB = CREATIVE_TABS.register("sky_kit_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.ALLIUM)).title(Component.translatable("skykit.creativetab"))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(SkyKit.MOAI_TOTEM.get())).title(Component.translatable("skykit.creativetab"))
                     .displayItems(((itemDisplayParameters, output) -> {
                         ITEMS.getEntries().forEach(itemDeferredHolder -> {
                             output.accept(itemDeferredHolder.value());
@@ -85,6 +85,12 @@ public class SkyKit {
                     TIER_1.get(), TIER_2.get(), TIER_3.get(), TIER_4.get(), TIER_5.get()).build(null));
 
     public static final DeferredBlock<Block> MOAI_MACHINE = registerBlock("moai_machine",
+            () -> new MoaiMachine(BlockBehaviour.Properties.of()
+                    .strength(1f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<Block> MOAI_TOTEM = registerBlock("moai_totem",
             () -> new MoaiMachine(BlockBehaviour.Properties.of()
                     .strength(1f)
                     .sound(SoundType.METAL)

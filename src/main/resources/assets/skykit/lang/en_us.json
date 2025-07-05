@@ -7,6 +7,8 @@
   "block.skykit.tier_5_block": "Cobblestone Generator V",
 
   "block.skykit.moai_machine": "Moai Machine",
+  "block.skykit.moai_machine.description": "A machine that generates Moai statues",
+  "block.skykit.moai_totem": "Moai Totem",
 
   "tooltip.skykit.genblock.tier": "Tier %s",
   "tooltip.skykit.genblock.production": "Produces %s Cobblestone per ticks"
