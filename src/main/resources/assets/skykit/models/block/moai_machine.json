@@ -1,21 +1,21 @@
 {
   "parent": "minecraft:block/cube_all",
-  "render_type": "cutout",
   "textures": {
-    "0": "skykit:block/moai_machine_side",
-    "1": "skykit:block/moai_machine_front"
+    "side": "skykit:block/moai_machine_side",
+    "front": "skykit:block/moai_machine_front",
+    "particle": "skykit:block/moai_machine_side"
   },
   "elements": [
     {
       "from": [0, 0, 0],
       "to": [16, 16, 16],
       "faces": {
-        "north": {"uv": [0, 0, 16, 16], "texture": "#1"},
-        "east": {"uv": [0, 0, 16, 16], "texture": "#0"},
-        "south": {"uv": [0, 0, 16, 16], "texture": "#0"},
-        "west": {"uv": [0, 0, 16, 16], "texture": "#0"},
-        "up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#0"},
-        "down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+        "north": {"uv": [0, 0, 16, 16], "texture": "#front"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#side"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#side"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#side"},
+        "up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#side"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#side"}
       }
     }
   ]

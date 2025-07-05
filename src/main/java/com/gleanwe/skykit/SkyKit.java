@@ -53,35 +53,30 @@ public class SkyKit {
     public static final DeferredBlock<Block> TIER_1 = registerBlock("tier_1_block",
             () -> new GenBlock(BlockBehaviour.Properties.of()
                     .strength(1f)
-                    .noTerrainParticles()
                     .sound(SoundType.GILDED_BLACKSTONE)
                     .lightLevel(state -> 15), 1));
 
     public static final DeferredBlock<Block> TIER_2 = registerBlock("tier_2_block",
             () -> new GenBlock(BlockBehaviour.Properties.of()
                     .strength(1f)
-                    .noTerrainParticles()
                     .sound(SoundType.GILDED_BLACKSTONE)
                     .lightLevel(state -> 15), 2));
 
     public static final DeferredBlock<Block> TIER_3 = registerBlock("tier_3_block",
             () -> new GenBlock(BlockBehaviour.Properties.of()
                     .strength(1f)
-                    .noTerrainParticles()
                     .sound(SoundType.GILDED_BLACKSTONE)
                     .lightLevel(state -> 15), 3));
 
     public static final DeferredBlock<Block> TIER_4 = registerBlock("tier_4_block",
             () -> new GenBlock(BlockBehaviour.Properties.of()
                     .strength(1f)
-                    .noTerrainParticles()
                     .sound(SoundType.GILDED_BLACKSTONE)
                     .lightLevel(state -> 15), 4));
 
     public static final DeferredBlock<Block> TIER_5 = registerBlock("tier_5_block",
             () -> new GenBlock(BlockBehaviour.Properties.of()
                     .strength(1f)
-                    .noTerrainParticles()
                     .sound(SoundType.GILDED_BLACKSTONE)
                     .lightLevel(state -> 15), 5));
 
@@ -90,7 +85,7 @@ public class SkyKit {
                     TIER_1.get(), TIER_2.get(), TIER_3.get(), TIER_4.get(), TIER_5.get()).build(null));
 
     public static final DeferredBlock<Block> MOAI_MACHINE = registerBlock("moai_machine",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new MoaiMachine(BlockBehaviour.Properties.of()
                     .strength(1f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));

@@ -70,7 +70,7 @@ public class GenBlock extends BaseEntityBlock {
 
                 if (ItemStack.isSameItemSameComponents(itemInHand, blockEntity.getBuffer())) {
                     int addedCount;
-                    if (isShiftClick) {
+                    if (!isShiftClick) {
                         addedCount = Math.min(itemInHand.getMaxStackSize() - itemInHand.getCount(), blockEntity.getBuffer().getCount());
                     } else {
                         addedCount = Math.min(1, Math.min(itemInHand.getMaxStackSize() - itemInHand.getCount(), blockEntity.getBuffer().getCount()));
@@ -79,7 +79,7 @@ public class GenBlock extends BaseEntityBlock {
                     blockEntity.getBuffer().shrink(addedCount);
                 } else if (itemInHand.isEmpty()) {
                     var addedStack = blockEntity.getBuffer().copy();
-                    if (isShiftClick) {
+                    if (!isShiftClick) {
                         addedStack.setCount(Math.min(addedStack.getCount(), addedStack.getMaxStackSize()));
                     } else {
                         addedStack.setCount(1);

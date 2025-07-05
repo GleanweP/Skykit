@@ -5,7 +5,8 @@
     "6": "minecraft:block/water_still",
     "7": "minecraft:block/cobblestone",
     "8": "minecraft:block/glass",
-    "9": "minecraft:block/emerald_block"
+    "9": "minecraft:block/emerald_block",
+    "particle": "minecraft:block/emerald_block"
   },
   "elements": [
     {
