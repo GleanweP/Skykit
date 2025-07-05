@@ -66,16 +66,28 @@ public class GenBlock extends BaseEntityBlock {
         if (level.getBlockEntity(pos) instanceof GenBlockEntity blockEntity) {
             if (!blockEntity.getBuffer().isEmpty()) {
                 var itemInHand = player.getItemInHand(InteractionHand.MAIN_HAND);
+                boolean isShiftClick = player.isShiftKeyDown();
+
                 if (ItemStack.isSameItemSameComponents(itemInHand, blockEntity.getBuffer())) {
-                    var addedCount = Math.min(itemInHand.getMaxStackSize() - itemInHand.getCount(), blockEntity.getBuffer().getCount());
+                    int addedCount;
+                    if (isShiftClick) {
+                        addedCount = Math.min(itemInHand.getMaxStackSize() - itemInHand.getCount(), blockEntity.getBuffer().getCount());
+                    } else {
+                        addedCount = Math.min(1, Math.min(itemInHand.getMaxStackSize() - itemInHand.getCount(), blockEntity.getBuffer().getCount()));
+                    }
                     itemInHand.grow(addedCount);
                     blockEntity.getBuffer().shrink(addedCount);
                 } else if (itemInHand.isEmpty()) {
                     var addedStack = blockEntity.getBuffer().copy();
-                    addedStack.setCount(Math.min(addedStack.getCount(), addedStack.getMaxStackSize()));
+                    if (isShiftClick) {
+                        addedStack.setCount(Math.min(addedStack.getCount(), addedStack.getMaxStackSize()));
+                    } else {
+                        addedStack.setCount(1);
+                    }
+
                     player.setItemInHand(InteractionHand.MAIN_HAND, addedStack);
 
-                    if (addedStack.getCount() == blockEntity.getBuffer().getCount()) {
+                    if (addedStack.getCount() >= blockEntity.getBuffer().getCount()) {
                         blockEntity.clearBuffer();
                     } else {
                         blockEntity.getBuffer().shrink(addedStack.getCount());
@@ -91,6 +103,7 @@ public class GenBlock extends BaseEntityBlock {
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
         tooltip.add(Component.translatable("tooltip.skykit.genblock.tier", this.tier).withStyle(ChatFormatting.GOLD));
-        tooltip.add(Component.translatable("tooltip.skykit.genblock.production", this.tier).withStyle(ChatFormatting.GRAY));
+        int productionRate = (int) Math.pow(2, this.tier - 1);
+        tooltip.add(Component.translatable("tooltip.skykit.genblock.production", productionRate).withStyle(ChatFormatting.GRAY));
     }
 }

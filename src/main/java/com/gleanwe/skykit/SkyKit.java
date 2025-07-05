@@ -1,14 +1,15 @@
 package com.gleanwe.skykit;
 
 
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -95,21 +96,9 @@ public class SkyKit {
         CREATIVE_TABS.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
-        //modEventBus.addListener(this::gatherData);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
-
-   // private void gatherData(FMLCommonSetupEvent event) {
-   //     var generator = event.getGenerator();
-   //     var packOutput = event.getPackOutput();
-   //     var lookupProvider = event.getLookupProvider();
-   //     var existingFileHelper = event.getExistingFileHelper();
-
-        //generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
-        //generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
-        //generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
-    //}
 
     private static DeferredBlock<Block> registerBlock(String name, Supplier<? extends Block> supplier) {
         DeferredBlock<Block> blockDeferredHolder = BLOCKS.register(name, supplier);
@@ -135,6 +124,30 @@ public class SkyKit {
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        }
+
+        @SubscribeEvent
+        public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
+            event.register((state, level, pos, tintIndex) -> {
+                if (level != null && pos != null && tintIndex == 0) {
+                    return BiomeColors.getAverageWaterColor(level, pos);
+                }
+                return 0x3F76E4; // Default water color
+            }, TIER_1.get(), TIER_2.get(), TIER_3.get(), TIER_4.get(), TIER_5.get());
+        }
+
+        @SubscribeEvent
+        public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
+            event.register((stack, tintIndex) -> {
+                if (tintIndex == 0) {
+                    var player = Minecraft.getInstance().player;
+                    var level = Minecraft.getInstance().level;
+                    if (level != null && player != null) {
+                        return BiomeColors.getAverageWaterColor(level, player.blockPosition());
+                    }
+                }
+                return 0x3F76E4; // Default water color
+            }, TIER_1.get(), TIER_2.get(), TIER_3.get(), TIER_4.get(), TIER_5.get());
         }
     }
 }

@@ -23,7 +23,7 @@ public class GenBlockEntity extends BlockEntity {
 
     private void updateMaxBufferSize() {
         if (getBlockState().getBlock() instanceof GenBlock genBlock) {
-            this.maxBufferSize = Config.baseBufferSize * genBlock.tier;
+            this.maxBufferSize = Config.baseBufferSize * (int) Math.pow(2, genBlock.tier - 1);
         } else {
             this.maxBufferSize = Config.baseBufferSize; // Fallback if block is not a GenBlock
         }
@@ -38,7 +38,7 @@ public class GenBlockEntity extends BlockEntity {
 
     private void generateItems() {
         if (getBlockState().getBlock() instanceof GenBlock genBlock) {
-            int productionRate = genBlock.tier;
+            int productionRate = (int) Math.pow(2, genBlock.tier - 1);
             ItemStack cobblestone = new ItemStack(Items.COBBLESTONE, productionRate);
 
             if (internalBuffer.isEmpty()) {
