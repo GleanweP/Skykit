@@ -5,7 +5,9 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -91,7 +93,7 @@ public class SkyKit {
                     .requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<Block> MOAI_TOTEM = registerBlock("moai_totem",
-            () -> new MoaiMachine(BlockBehaviour.Properties.of()
+            () -> new MoaiTotem(BlockBehaviour.Properties.of()
                     .strength(1f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));

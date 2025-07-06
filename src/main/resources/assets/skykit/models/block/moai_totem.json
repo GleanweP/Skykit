@@ -1,5 +1,6 @@
 {
 	"texture_size": [64, 64],
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"1": "skykit:block/moai_totem",
 		"particle": "skykit:block/moai_totem"
